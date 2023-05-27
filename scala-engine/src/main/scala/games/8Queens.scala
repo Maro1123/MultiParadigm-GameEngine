@@ -59,10 +59,10 @@ def eightQueensController(currState: GameState, input: String) : (GameState, Boo
     case solvePattern(_*) =>
       val(solvedState, solvable) = eightQueensSolve(currState)
       if(solvable){
-        println("Solution found!")
+        print("Solution found!")
         (solvedState,true)
       }else{
-        println("The queens currently placed make it impossible to solve the puzzle!" +
+        print("The queens currently placed make it impossible to solve the puzzle!" +
           "\nTry to remove or replace some pieces.")
         (currState,true)
       }
@@ -101,7 +101,7 @@ def eightQueensDrawer(currState: GameState) : Unit = {
 def eightQueensSolve(gameState: GameState): (GameState, Boolean) = {
   val q1 = new Query("consult('src/main/prolog/8queens.pl')") // Link to Prolog file
   if(!q1.hasSolution) { // Check that the Prolog file works
-    println("Problem with prolog file, cannot consult.")
+    print("Problem with prolog file, cannot consult.")
     return (gameState, false)
   }
   // Construct input string to Prolog.
