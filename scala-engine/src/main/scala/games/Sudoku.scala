@@ -28,7 +28,7 @@ def applySolution(gameState: Array[Array[String]], solution: Array[Array[Int]], 
 
 def sudokuController(gameState: GameState, move: String) : (GameState, Boolean) = {
 
-  val position = """(?i)(\b(?:\d[a-h])|(?:[a-h]\d)\b)(?-i)""".r.unanchored
+  val position = """(?i)(\b(?:\d[a-i])|(?:[a-i]\d)\b)(?-i)""".r.unanchored
   val operation = """(?i)(del|\b\d\b|solve)(?-i)""".r.unanchored
 
   def delete(pos: Array[Int])(gameState: GameState): (GameState, Boolean) = {
@@ -44,6 +44,9 @@ def sudokuController(gameState: GameState, move: String) : (GameState, Boolean) 
     val NW_corner_currentSquare: Array[Int] = pos.map(p => (p / 3) * 3)
 
     var invalidOP: Boolean = false
+
+    if(gameState._1(pos(0))(pos(1)) != " ")
+      invalidOP = true
 
     gameState._1.slice(NW_corner_currentSquare(0), NW_corner_currentSquare(0) + 3)
       .map(row => row.slice(NW_corner_currentSquare(1), NW_corner_currentSquare(1) + 3))
